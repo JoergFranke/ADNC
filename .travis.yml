@@ -5,6 +5,6 @@ python:
   - 3.6
 cache: pip
 install:
-  - pip install --user -r requirements.txt
+  - pip install -r requirements.txt
 script:
   - pytest --cov-report term-missing --cov app -v
