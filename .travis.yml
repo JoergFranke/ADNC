@@ -8,4 +8,5 @@ install:
   - easy_install distribute
   - pip install -r requirements.txt
 script:
-  - pytest --cov-report term-missing --cov app -v
+  - pytest --cov=adnc test
+
