@@ -18,11 +18,13 @@ import tensorflow as tf
 
 from adnc.utils.tf_functions import oneplus
 
+
 @pytest.fixture()
 def session():
     with tf.Session() as sess:
         yield sess
     tf.reset_default_graph()
+
 
 def test_oneplus(session):
     tf_x = tf.constant([1, 2, 3], dtype=tf.float32, )

@@ -16,7 +16,7 @@ import pytest
 import numpy as np
 import tensorflow as tf
 
-from adnc.utils.normalization import layer_norm
+from adnc.utils.initialization import unit_simplex_initialization
 
 
 @pytest.fixture()
@@ -25,18 +25,22 @@ def session():
         yield sess
     tf.reset_default_graph()
 
+
 @pytest.fixture()
 def np_rng():
     seed = np.random.randint(1, 999)
     return np.random.RandomState(seed)
 
-def test_layer_norm(session, np_rng):
-    np_weights = np_rng.normal(0, 1, [64, 128])
 
-    weights = tf.constant(np_weights, dtype=tf.float32)
-    weights_ln = layer_norm(weights, 'test')
+BATCH_SIZE = 4
+SHAPE = [2, 3]
 
-    session.run(tf.global_variables_initializer())
-    weights_ln = session.run(weights_ln)
 
-    assert weights_ln.shape == (64, 128)
+def test_unit_simplex_initialization(session, np_rng):
+    init_matrix = unit_simplex_initialization(np_rng, BATCH_SIZE, SHAPE, dtype=tf.float32)
+    np_init_matrix = init_matrix.eval()
+    for b in range(BATCH_SIZE):
+        tensor = np_init_matrix[b, :, :]
+        assert np.sum(tensor) <= 1
+        assert tensor.min() >= 0
+        assert tensor.max() <= 1
