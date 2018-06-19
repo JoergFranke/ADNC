@@ -7,6 +7,7 @@ cache: pip
 install:
   - easy_install distribute
   - pip install -r requirements.txt
+  - pip install -e .
 script:
   - pytest --cov=adnc test
 
