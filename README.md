@@ -1,8 +1,8 @@
 # ADNC
 
 [![Build Status](https://travis-ci.org/joergfranke/ADNC.svg?branch=master)](https://travis-ci.org/joergfranke/ADNC)
-[![Python](https://img.shields.io/badge/python-3.6+-yellow.svg)](https://www.python.org/downloads/release/python-365/)
-[![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8+-yellow.svg)](https://www.tensorflow.org/)
+[![Python](https://img.shields.io/badge/python-3.6-yellow.svg)](https://www.python.org/downloads/release/python-365/)
+[![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
 
 
 
