@@ -1,9 +1,9 @@
 # ADNC
 
 [![Build Status](https://travis-ci.org/joergfranke/ADNC.svg?branch=master)](https://travis-ci.org/joergfranke/ADNC)
-[![Python](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-365/)
-[![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python](https://img.shields.io/badge/python-3.6+-yellow.svg)](https://www.python.org/downloads/release/python-365/)
+[![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8+-yellow.svg)](https://www.tensorflow.org/)
+
 
 
 A Differentiable Neural Computer (DNC) implementation with advancements for a more robust and scalable usage. It 
