@@ -18,6 +18,7 @@ import tensorflow as tf
 class Optimizer:
     def __init__(self, config, loss, variables, use_locking=False):
 
+        self.epochs = config["epochs"]
         self.use_locking = use_locking
         self.learn_rate = config["learn_rate"]
         self.optimizer = config["optimizer"]
