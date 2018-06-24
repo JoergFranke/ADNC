@@ -20,32 +20,35 @@ from adnc.model.memory_units.multi_write_content_based_cell import MWContentMemo
 from adnc.model.memory_units.multi_write_dnc_cell import MWDNCMemoryUnitCell
 
 
+def get_memory_unit(input_size, config, name='mu', analyse=False, reuse=False, seed=123, dtype=tf.float32):
+    memory_length = config['memory_length']
+    memory_width = config['memory_width']
+    read_heads = config['read_heads']
+    dnc_norm = config['dnc_norm']
+    bypass_dropout = config['bypass_dropout']
 
-def get_memory_unit(input_size, config, name='mu',analyse=False, reuse=False, seed=123, dtype=tf.float32):
+    if 'write_heads' in config:
+        write_heads = config['write_heads']
 
-        memory_length = config['memory_length']
-        memory_width = config['memory_width']
-        read_heads = config['read_heads']
-        dnc_norm = config['dnc_norm']
-        bypass_dropout = config['bypass_dropout']
+    if config['cell_type'] == 'dnc':
+        mu_cell = DNCMemoryUnitCell(input_size, memory_length, memory_width, read_heads, bypass_dropout=bypass_dropout,
+                                    dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype, name=name)
+    elif config['cell_type'] == 'cmu':
+        mu_cell = ContentBasedMemoryUnitCell(input_size, memory_length, memory_width, read_heads,
+                                             bypass_dropout=bypass_dropout,
+                                             dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,
+                                             name=name)
+    elif config['cell_type'] == 'mwdnc' and 'write_heads' in config:
+        mu_cell = MWDNCMemoryUnitCell(input_size, memory_length, memory_width, read_heads, write_heads,
+                                      bypass_dropout=bypass_dropout,
+                                      dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,
+                                      name=name)
+    elif config['cell_type'] == 'mwcmu' and 'write_heads' in config:
+        mu_cell = MWContentMemoryUnitCell(input_size, memory_length, memory_width, read_heads, write_heads,
+                                          bypass_dropout=bypass_dropout,
+                                          dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,
+                                          name=name)
+    else:
+        raise UserWarning('Memory Unit: wrong cell type')
 
-        if 'write_heads' in config:
-            write_heads = config['write_heads']
-
-
-        if config['cell_type'] == 'dnc':
-            mu_cell = DNCMemoryUnitCell(input_size, memory_length, memory_width, read_heads, bypass_dropout=bypass_dropout,
-                                        dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse,  dtype=dtype, name=name)
-        elif config['cell_type'] == 'cmu':
-            mu_cell = ContentBasedMemoryUnitCell(input_size, memory_length, memory_width, read_heads, bypass_dropout=bypass_dropout,
-                                        dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype, name=name)
-        elif config['cell_type'] == 'mwdnc' and 'write_heads' in config:
-            mu_cell = MWDNCMemoryUnitCell(input_size, memory_length, memory_width, read_heads, write_heads, bypass_dropout=bypass_dropout,
-                                        dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse,  dtype=dtype, name=name)
-        elif config['cell_type'] == 'mwcmu' and 'write_heads' in config:
-            mu_cell = MWContentMemoryUnitCell(input_size, memory_length, memory_width, read_heads, write_heads, bypass_dropout=bypass_dropout,
-                                        dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse,  dtype=dtype, name=name)
-        else:
-            raise UserWarning('Memory Unit: wrong cell type')
-
-        return mu_cell
+    return mu_cell
