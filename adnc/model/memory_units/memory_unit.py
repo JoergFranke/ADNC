@@ -33,7 +33,7 @@ def get_memory_unit(input_size, config, name='mu', analyse=False, reuse=False, s
     if config['cell_type'] == 'dnc':
         mu_cell = DNCMemoryUnitCell(input_size, memory_length, memory_width, read_heads, bypass_dropout=bypass_dropout,
                                     dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype, name=name)
-    elif config['cell_type'] == 'cmu':
+    elif config['cell_type'] == 'cbmu':
         mu_cell = ContentBasedMemoryUnitCell(input_size, memory_length, memory_width, read_heads,
                                              bypass_dropout=bypass_dropout,
                                              dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,
@@ -43,7 +43,7 @@ def get_memory_unit(input_size, config, name='mu', analyse=False, reuse=False, s
                                       bypass_dropout=bypass_dropout,
                                       dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,
                                       name=name)
-    elif config['cell_type'] == 'mwcmu' and 'write_heads' in config:
+    elif config['cell_type'] == 'mwcbmu' and 'write_heads' in config:
         mu_cell = MWContentMemoryUnitCell(input_size, memory_length, memory_width, read_heads, write_heads,
                                           bypass_dropout=bypass_dropout,
                                           dnc_norm=dnc_norm, seed=seed, reuse=reuse, analyse=analyse, dtype=dtype,

@@ -185,7 +185,7 @@ class MWDNCMemoryUnitCell(BaseMemoryUnitCell):
         read_strengths = oneplus(read_strengths)
         read_strengths = tf.expand_dims(read_strengths, axis=2)
         read_modes = tf.reshape(read_modes, [self.h_B, self.h_RH, 1 + 2 * self.h_WH])
-        read_modes = tf.nn.softmax(read_modes, dim=2)
+        read_modes = tf.nn.softmax(read_modes, axis=2)
 
         return alloc_gates, free_gates, write_gates, write_keys, write_strengths, write_vectors, \
                erase_vectors, read_keys, read_strengths, read_modes

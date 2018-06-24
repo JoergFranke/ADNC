@@ -80,7 +80,7 @@ class BaseMemoryUnitCell():
         similarity = tf.squeeze(similarity)
         adjusted_similarity = similarity * strengths
 
-        softmax_similarity = tf.nn.softmax(adjusted_similarity, dim=-1)
+        softmax_similarity = tf.nn.softmax(adjusted_similarity, axis=-1)
 
         return softmax_similarity
 
