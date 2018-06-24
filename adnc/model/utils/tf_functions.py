@@ -12,14 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+import tensorflow as tf
 
-from adnc.utils.early_stop import EarlyStop
 
+def oneplus(x):
+    return 1 + tf.nn.softplus(x)
 
-def test_early_stop():
-    test_seq = [1, 2, 1, 4, 2, 1, 3, 4, 5, 2, 7, 2, 3, 4, 5]
-    true_seq = [False, False, False, False, False, False, False, False, True, False, False, False, False, False, True]
+def get_activation(activation):
 
-    e_stop = EarlyStop(4)
-    for test, true in zip(test_seq, true_seq):
-        assert true == e_stop(test)
+    if activation == 'tanh':
+        act = tf.tanh
+    elif activation == 'relu':
+        act = tf.nn.relu
+    elif activation == 'elu':
+        act = tf.nn.elu
+    elif activation == 'softsign':
+        act = tf.nn.softsign
+    elif activation == 'oneplus':
+        act = oneplus
+    else:
+        raise UserWarning("Activation function not found.")
+
+    return act

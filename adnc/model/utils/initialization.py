@@ -13,13 +13,12 @@
 # limitations under the License.
 # ==============================================================================
 import numpy as np
+import tensorflow as tf
 
 
-def softmax(x):
-    e = np.exp(x)
-    return e / np.sum(e, axis=-1, keepdims=True)
-
-
-def weighted_softmax(x, s):
-    e_x = np.exp(x * s)
-    return e_x / e_x.sum(axis=-1, keepdims=True)
+def unit_simplex_initialization(rng, batch_size, shape, dtype=tf.float32):
+    mat = []
+    for i in range(batch_size):
+        mat.append(rng.uniform(0, 1 / np.sum(shape), shape))
+    mat = np.array(mat)
+    return tf.constant(mat, dtype=dtype)
