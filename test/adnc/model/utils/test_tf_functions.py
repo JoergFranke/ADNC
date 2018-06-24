@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-import pytest
 import numpy as np
+import pytest
 import tensorflow as tf
 
-from adnc.utils.initialization import unit_simplex_initialization
+from adnc.model.utils import oneplus
 
 
 @pytest.fixture()
@@ -26,21 +26,9 @@ def session():
     tf.reset_default_graph()
 
 
-@pytest.fixture()
-def np_rng():
-    seed = np.random.randint(1, 999)
-    return np.random.RandomState(seed)
+def test_oneplus(session):
+    tf_x = tf.constant([1, 2, 3], dtype=tf.float32, )
+    tf_x_oneplus = oneplus(tf_x)
+    np_x_oneplus = tf_x_oneplus.eval()
 
-
-BATCH_SIZE = 4
-SHAPE = [2, 3]
-
-
-def test_unit_simplex_initialization(session, np_rng):
-    init_matrix = unit_simplex_initialization(np_rng, BATCH_SIZE, SHAPE, dtype=tf.float32)
-    np_init_matrix = init_matrix.eval()
-    for b in range(BATCH_SIZE):
-        tensor = np_init_matrix[b, :, :]
-        assert np.sum(tensor) <= 1
-        assert tensor.min() >= 0
-        assert tensor.max() <= 1
+    assert np.allclose(np_x_oneplus, 1 + np.log1p(np.exp([1, 2, 3])))

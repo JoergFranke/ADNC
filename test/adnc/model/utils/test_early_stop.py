@@ -12,23 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-import pytest
-import numpy as np
-import tensorflow as tf
-
-from adnc.utils.tf_functions import oneplus
+from adnc.model.utils import EarlyStop
 
 
-@pytest.fixture()
-def session():
-    with tf.Session() as sess:
-        yield sess
-    tf.reset_default_graph()
+def test_early_stop():
+    test_seq = [1, 2, 1, 4, 2, 1, 3, 4, 5, 2, 7, 2, 3, 4, 5]
+    true_seq = [False, False, False, False, False, False, False, False, True, False, False, False, False, False, True]
 
-
-def test_oneplus(session):
-    tf_x = tf.constant([1, 2, 3], dtype=tf.float32, )
-    tf_x_oneplus = oneplus(tf_x)
-    np_x_oneplus = tf_x_oneplus.eval()
-
-    assert np.allclose(np_x_oneplus, 1 + np.log1p(np.exp([1, 2, 3])))
+    e_stop = EarlyStop(4)
+    for test, true in zip(test_seq, true_seq):
+        assert true == e_stop(test)

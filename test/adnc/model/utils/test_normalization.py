@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-import pytest
 import numpy as np
+import pytest
 import tensorflow as tf
 
-from adnc.utils.normalization import layer_norm
+from adnc.model.utils import layer_norm
 
 
 @pytest.fixture()
