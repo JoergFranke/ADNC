@@ -138,7 +138,6 @@ class CopyTask():
 
 
 if __name__ == '__main__':
-
     feature_width = 20
     set_list = {"train": {"quantity": 20, "min_length": 20, "max_length": 50},
                 "valid": {"quantity": 20, "min_length": 50, "max_length": 70}}
@@ -159,28 +158,28 @@ if __name__ == '__main__':
 
     fig, (ax1, ax2) = plt.subplots(2, sharex=True, sharey=False, figsize=(13, 8))
     pad = 5
-    length = int((samples['x'].shape[0]-1)/2)
+    length = int((samples['x'].shape[0] - 1) / 2)
 
     plot_x = np.argmax(samples['x'], axis=1)
-    plot_x[length+1:] = -1
+    plot_x[length + 1:] = -1
     ax1.plot(plot_x, 's', color='midnightblue')
     respons_flag = np.ones(plot_x.shape) * -1
     respons_flag[length] = feature_width
     ax1.plot(respons_flag, 's', color='deeppink')
     ax1.set_xticklabels([])
     ax1.set_yticks(np.arange(0, feature_width + 1, 1))
-    ax1.set_ylim(-0.5, feature_width+0.5)
-    ax1.set_xlim(-0.5, length*2+1.5)
+    ax1.set_ylim(-0.5, feature_width + 0.5)
+    ax1.set_xlim(-0.5, length * 2 + 1.5)
     ax1.annotate('data', xy=(0, 0.5), xytext=(-ax1.yaxis.labelpad - pad, 0), xycoords=ax1.yaxis.label,
                  textcoords='offset points', size='24', ha='right', va='center')
 
     plot_y = np.argmax(samples['y'], axis=1)
-    plot_y[:length+1] = -1
+    plot_y[:length + 1] = -1
     ax2.plot(plot_y, 's', color='midnightblue')
     ax2.set_xticklabels([])
     ax2.set_yticks(np.arange(0, feature_width, 1))
-    ax2.set_ylim(-0.5, feature_width-0.5)
-    ax2.set_xlim(-0.5, length*2+1.5)
+    ax2.set_ylim(-0.5, feature_width - 0.5)
+    ax2.set_xlim(-0.5, length * 2 + 1.5)
     ax2.annotate('target', xy=(0, 0.5), xytext=(-ax2.yaxis.labelpad - pad, 0), xycoords=ax2.yaxis.label,
                  textcoords='offset points', size='24', ha='right', va='center')
 
