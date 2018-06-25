@@ -55,7 +55,10 @@ class MANN():
         if self.input_embedding:
             word_idx_dict = self.input_embedding['word_idx_dict']
             embedding_size = self.input_embedding['embedding_size']
-            tmp_dir = self.input_embedding['tmp_dir']
+            if 'tmp_dir' in self.input_embedding:
+                tmp_dir = self.input_embedding['tmp_dir']
+            else:
+                tmp_dir = "data_tmp"
             glove = WordEmbedding(embedding_size, word_idx_dict=word_idx_dict, initialization='glove', tmp_dir=tmp_dir)
 
             self._data = tf.placeholder(tf.int64, [None, self.batch_size], name='x')
