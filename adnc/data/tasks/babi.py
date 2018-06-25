@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-import numpy as np
 import copy
-from urllib.request import Request, urlopen
-import tarfile
 import pathlib
+import tarfile
 from collections import Counter
+from urllib.request import Request, urlopen
+
+import numpy as np
 
 DEFAULT_DATA_FOLDER = "data_babi"
 LONGEST_SAMPLE_LENGTH = 1920
@@ -375,6 +376,29 @@ class bAbI():
 if __name__ == '__main__':
 
     config = {'set_type': ['en-10k'], 'task_selection': ['all'], 'valid_ratio': 0, 'seed': 211}
+
+    print("                                           20 bAbI Tasks - Statistics")
+    print(
+        "________________________________________________________________________________________________________________")
+    total_len = []
+    total_sum = 0
+
+    for s in range(20):
+        config['task_selection'] = [s + 1]
+
+        sd = bAbI(config)
+        samples = [sd.get_sample('train', i) for i in range(sd.sample_amount('train'))]
+        len = [sample['x'].__len__() for sample in samples]
+        len = np.asarray(len)
+        quest_per_sample = [sample['m'].sum() for sample in samples]
+        quest_per_sample = np.mean(quest_per_sample)
+        vocab_size = sd.vocabulary_size
+        print("\033[96m task: {:3}\033[0m, samples: {:5}, quest_per_sample {:5.3f}, vocab_size: {:3}, min len: {:3.0f},"
+              " mean len: {:3.0f}, max len: {:4.0f}".format(s + 1, len.shape[0], quest_per_sample, vocab_size,
+                                                            len.min(),
+                                                            len.mean(), len.max()))
+    print(
+        "________________________________________________________________________________________________________________")
     config['task_selection'] = ['all']
     sd = bAbI(config)
     word_dict = sd.word_dict
@@ -385,33 +409,9 @@ if __name__ == '__main__':
     quest_per_sample = [sample['m'].sum() for sample in samples]
     quest_per_sample = np.mean(quest_per_sample)
     vocab_size = sd.vocabulary_size
-    statistics_all = "\033[96m task: {}\033[0m, samples: {:5}, quest_per_sample {:3.3f}, vocab_size: {:3}, min len: " \
-                     "{:3.0f}, mean len: {:3.0f}, max len: {:4.0f}".format('all', len.shape[0], quest_per_sample,
-                                                                           vocab_size, len.min(), len.mean(), len.max())
-
-    print("                                           20 bAbI Tasks - Statistics")
-    print(
-        "_______________________________________________________________________________________________________________")
-    total_len = []
-    total_sum = 0
-
-    for s in range(20):
-        config['task_selection'] = [s + 1]
-
-        sd = bAbI(config, word_dict, re_word_dict)
-        samples = [sd.get_sample('train', i) for i in range(sd.sample_amount('train'))]
-        len = [sample['x'].__len__() for sample in samples]
-        len = np.asarray(len)
-        quest_per_sample = [sample['m'].sum() for sample in samples]
-        quest_per_sample = np.mean(quest_per_sample)
-        vocab_size = sd.vocabulary_size
-        print("\033[96m task: {:3}\033[0m, samples: {:5}, quest_per_sample {:4.3f}, vocab_size: {:3}, min len: {:3.0f},"
-              " mean len: {:3.0f}, max len: {:4.0f}".format(s + 1, len.shape[0], quest_per_sample, vocab_size,
-                                                            len.min(),
-                                                            len.mean(), len.max()))
-    print(
-        "_______________________________________________________________________________________________________________")
-    print(statistics_all)
+    print("\033[96m task: {}\033[0m, samples: {:5}, quest_per_sample {:5.3f}, vocab_size: {:3}, min len: " \
+          "{:3.0f}, mean len: {:3.0f}, max len: {:4.0f}".format('all', len.shape[0], quest_per_sample,
+                                                                vocab_size, len.min(), len.mean(), len.max()))
 
     print("\nbAbI Tasks 16 - Example without augmentation")
     print("____________________________________________")

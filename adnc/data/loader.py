@@ -19,7 +19,7 @@ import numpy as np
 from adnc.data.utils.batch_generator import BatchGenerator
 
 from adnc.data.tasks.repeat_copy import CopyTask
-# from adnc.data.tasks.cnn_rc import ReadingComprehension
+from adnc.data.tasks.cnn_rc import ReadingComprehension
 from adnc.data.tasks.babi import bAbI
 
 
@@ -29,8 +29,8 @@ class DataLoader():
 
         if config['data_set'] == 'copy_task':
             self.dataset = CopyTask(self.config)
-        # elif config['data_set'] == 'cnn':
-        #     self.dataset = ReadingComprehension(self.config)
+        elif config['data_set'] == 'cnn':
+            self.dataset = ReadingComprehension(self.config)
         elif config['data_set'] == 'babi':
             self.dataset = bAbI(self.config, word_dict, re_word_dict)
 
