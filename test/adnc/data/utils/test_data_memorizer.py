@@ -25,7 +25,7 @@ def tmp_dir():
     tmp_dir = TMP_DIR
     pathlib.Path(tmp_dir).mkdir(parents=True, exist_ok=True)
     yield tmp_dir
-    shutil.rmtree
+    shutil.rmtree(tmp_dir)
 
 
 class TestDataMemorizer():
@@ -38,8 +38,8 @@ class TestDataMemorizer():
         data_memory_2 = DataMemorizer(hash_config_2, tmp_dir)
         data_memory_3 = DataMemorizer(hash_config_3, tmp_dir)
 
-        assert data_memory_1.hash == data_memory_2.hash
-        assert data_memory_1.hash != data_memory_3.hash
+        assert data_memory_1.hash_name == data_memory_2.hash_name
+        assert data_memory_1.hash_name != data_memory_3.hash_name
 
     def test_data_memorizing(self, tmp_dir):
         hash_config = {'set_types': 'tokens', 'target_mode': 'mode1', 'seed': 123}
