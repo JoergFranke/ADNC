@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# default data folder
+data_babi/
+data_cnn/
+data_tmp/
