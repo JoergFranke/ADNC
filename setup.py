@@ -27,7 +27,7 @@ def parse_requirements(filename):
 
 install_reqs = parse_requirements(req_file)
 
-setup(name='adnc',
+setup(name='model',
       version='latest',
 
       packages=find_packages(exclude=['test', 'test.*']),
