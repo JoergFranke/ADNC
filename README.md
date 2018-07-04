@@ -4,15 +4,11 @@
 [![Python](https://img.shields.io/badge/python-3.5+-yellow.svg)](https://www.python.org/downloads/release/python-365/)
 [![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
 
-
-*THIS REPOSITORY IS IN CONSTRUCTION, NOT EVERYTHING IS WORKING FINE YET*
-
 This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
 scalable usage in Question Answering. It is applied to:
- 
 - [20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results)
 - [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with 
-passable results without any adaptation. 
+[passable results](#cnn-results) without any adaptation or hyper-parameter tuning. 
 
 This repository is the groundwork for the MRQA 2018 
 paper submission "Robust and Scalable Differentiable Neural Computer for Question Answering". It contains a modular and 
@@ -41,7 +37,7 @@ fully configurable DNC with the following advancements:
         </td>
         <td>
             <ul>
-            <li>Normalizes the memory unit's input %like  layer normalization</li>
+            <li>Normalizes the memory unit's input</li>
             <li>Increases the model stability during training</li>
             </ul>
         </td>
@@ -68,11 +64,11 @@ The plot below shows the impact of the different advancements in the word error 
 
 
 Furthermore, it contains a set of rich analysis tools to get a deeper insight in the functionality of the ADNC. For example
-that the advancements lead to a more meaningful gate usage of the memory cell.
+that the advancements lead to a more meaningful gate usage of the memory cell as you can see in the following plots:
 
-|DNC|ADNC|
-|---|---|
+
 | ![process_dnc](images/function_DNC_2.png) | ![process_adnc](images/function_ADNC_2.png) |
+|---|---|
 
 
 
@@ -80,7 +76,7 @@ that the advancements lead to a more meaningful gate usage of the memory cell.
 
 ### Setup ADNC
 
-To install ADNC and setup an virtual environment:
+To setup an virtual environment and install ADNC:
 ```
 git clone https://github.com/joergfranke/ADNC.git
 cd ADNC/
@@ -91,31 +87,36 @@ pip install -e .
 
 ### Inference
 
-For bAbI inference, choose pre-trained model (DNC, ADNC, BiADNC) in `scripts/inference_babi_task.py` and run:
+The repository contains different pre-trained models in the experiments folder.
+For __bAbI inference__, choose pre-trained model e.g. adnc and run:
+
+`python scripts/inference_babi_task.py adnc`
+
+Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16.
+
+For __CNN inference__ of pre-trained ADNC and run:
 
 `python scripts/inference_babi_task.py`
 
-For CNN inference, choose pre-trained model (ADNC, BiADNC) in `scripts/inference_cnn_task.py` and run:
-
-`python scripts/inference_babi_task.py`
 
 ### Training
 
-t.b.a.
+The configuration file `scripts/config.yml` contains the full config of the ADNC training. The training script can be run with:
+
+`python scripts/start/training.py`
+
+It starts a bAbI training and plots every epoch a function plot to control the training progress. 
 
 ### Plots
 
-t.b.a.
+To plot a function plot of the bAbI task -> t.b.a.
 
+`python scripts/plot_function_babi_task.py`
 					
-## Repository Structure
-
-t.b.a.
 
 
 
 ## bAbI Results
-
 
 | Task                             | DNC             | EntNet                 | SDNC                   | ADNC                  | BiADNC                 | BiADNC<br>+aug16|
 |----------------------------------|-----------------|------------------------|------------------------|------------------------|------------------------|--------------------------------------------------------|
@@ -141,3 +142,16 @@ t.b.a.
 | 20: agent’s motivation           | 0.0 ± 0.1   | 0.0 ± 0.0 | 0.0 ± 0.0 | 0.1 ± 0.1          | 0.1 ± 0.1          | 0.1 ± 0.1                                          |
 | __Mean WER:__                        | 16.7 ± 7.6  | 9.7 ± 2.6          | 6.4 ± 2.5          | 6.3 ± 2.7          | 3.2 ± 0.5          | 0.4 ± 0.3                                 |
 | __Failed Tasks (<5%):__ | 11.2 ± 5.4  | 5.0 ± 1.2          | 4.1 ± 1.6          | 3.2 ± 0.8          | 1.4 ± 0.5          | 0.0 ± 0.0                                 |
+
+## CNN Results
+
+| Model            | valid | test | 
+|:-----------------|:-----:|:----:|
+| Deep LSTM Reader | 55.0  | 57.0 |
+| Attentive Reader | 61.6  | 63.0 |
+| __ADNC__         | 67.5  | 69.0 |
+| AS Reader        | 68.6  | 69.5 |
+| Stanford AR      | 72.2  | 72.4 |
+| AoA Reader       | 73.1  | 74.4 |
+| ReasoNet         | 72.9  | 74.7 |
+| GA Reader        | 77.9  | 77.9 |
