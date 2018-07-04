@@ -50,11 +50,6 @@ class bAbI():
         else:
             self.augment16 = False
 
-        if 'extend' in config:
-            self.extend = config['extend']
-        else:
-            self.extend = False
-
         if 'data_dir' in config:
             data_dir = pathlib.Path(config['data_dir'])
         else:
@@ -281,10 +276,6 @@ class bAbI():
                     else:
                         used_color_list.append(word)
             sample_x = [item for sublist in s_list for item in sublist]
-
-        if self.extend > 1:
-            sample_x = sample_x[:-1] + [sample_x[-2] for _ in range(self.extend)] + [sample_x[-1] for _ in range(1)]
-            sample_y = sample_y[:-1] + [sample_y[-2] for _ in range(self.extend)] + [sample_y[-1] for _ in range(1)]
 
         return sample_x, sample_y
 

@@ -41,9 +41,6 @@ mann:
 babi_task:
   data_set:        'babi'
 
-  load_test:      True
-  load_vocab:     True
-
   seed:           325
   valid_ratio:    0.1 # like nature paper
   batch_size:     *batch_size
