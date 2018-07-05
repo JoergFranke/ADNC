@@ -25,7 +25,7 @@ class DNCMemoryUnitCell(BaseMemoryUnitCell):
 
         super().__init__(input_size, memory_length, memory_width, read_heads, bypass_dropout, dnc_norm, seed, reuse,
                          analyse, dtype, name)
-        self.h_B = 0  # will set in call
+
 
     @property
     def state_size(self):
@@ -142,7 +142,7 @@ class DNCMemoryUnitCell(BaseMemoryUnitCell):
             weighted_input = tf.matmul(inputs, w_x) + b_x
 
             if self.dnc_norm:
-                weighted_input = layer_norm(weighted_input, name='dnc_norm', dtype=self.dtype,
+                weighted_input = layer_norm(weighted_input, name='layer_norm', dtype=self.dtype,
                                             collection='memory_unit')
         return weighted_input
 

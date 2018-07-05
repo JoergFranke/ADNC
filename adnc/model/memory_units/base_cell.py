@@ -31,6 +31,7 @@ class BaseMemoryUnitCell():
         self.h_N = memory_length
         self.h_W = memory_width
         self.h_RH = read_heads
+        self.h_B = 0  # batch size, will be set in call
 
         self.dnc_norm = dnc_norm
         self.bypass_dropout = bypass_dropout
@@ -44,7 +45,7 @@ class BaseMemoryUnitCell():
         pass
 
     @abstractmethod
-    def zero_state(self):
+    def zero_state(self, batch_size, dtype=tf.float32):
         pass
 
     @property
