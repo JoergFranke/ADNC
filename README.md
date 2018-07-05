@@ -14,6 +14,8 @@ This repository is the groundwork for the MRQA 2018
 paper submission "Robust and Scalable Differentiable Neural Computer for Question Answering". It contains a modular and 
 fully configurable DNC with the following advancements: 
 
+
+
 <table>
     <tbody>
       <tr>
@@ -88,13 +90,13 @@ pip install -e .
 ### Inference
 
 The repository contains different pre-trained models in the experiments folder.
-For __bAbI inference__, choose pre-trained model e.g. adnc and run:
+For __bAbI inference__, choose pre-trained model e.g. `adnc` and run:
 
 `python scripts/inference_babi_task.py adnc`
 
 Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16.
 
-For __CNN inference__ of pre-trained ADNC and run:
+For __CNN inference__ of pre-trained ADNC run:
 
 `python scripts/inference_babi_task.py`
 
