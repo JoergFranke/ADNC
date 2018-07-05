@@ -28,7 +28,7 @@ class DataMemorizer():
         else:
             self.tmp_dir = pathlib.Path(tmp_dir)
 
-        if not self.tmp_dir.exists():
+        if not self.tmp_dir.is_dir():
             self.tmp_dir.mkdir(parents=True, exist_ok=True)
 
     def __call__(self, *args, **kwargs):
