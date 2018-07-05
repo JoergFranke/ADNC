@@ -15,6 +15,7 @@
 import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""  # gpu not required for inference
+
 import argparse
 import yaml
 import numpy as np

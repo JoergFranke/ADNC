@@ -13,10 +13,10 @@
 # limitations under the License.
 # ==============================================================================
 import os
-import argparse
+
+import tensorflow as tf
 import yaml
 from tqdm import tqdm
-import tensorflow as tf
 
 from adnc.data.loader import DataLoader
 from adnc.model.mann import MANN
