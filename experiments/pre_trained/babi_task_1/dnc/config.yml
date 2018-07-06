@@ -1,0 +1,54 @@
+#######################################
+###       Global Configuration      ###
+#######################################
+global:
+  batch_size:          &batch_size 32
+
+#######################################
+###     Training Configuration     ###
+#######################################
+training:
+  epochs:               75
+  learn_rate:           0.0001
+  optimizer:            'rmsprop'
+  optimizer_config:     {'momentum':0.9}
+  gradient_clipping:    10
+  weight_decay:         False
+
+
+
+#######################################
+###        MANN Configuration       ###
+#######################################
+mann:
+  name:                 'mann1'
+  seed:                 148
+  input_size:           0
+  output_size:          0
+  batch_size:           *batch_size
+  input_embedding:      False
+  architecture:         'uni'
+  controller_config:    {"num_units":[64], "layer_norm":True, "activation":'tanh', 'cell_type':'clstm', 'connect':'sparse', 'attention':False}
+  memory_unit_config:   {"cell_type":'dnc', "memory_length":128, "memory_width":32, "read_heads":2, "write_heads": 1, "dnc_norm":False, "bypass_dropout":False}
+  output_function:      "softmax"
+  output_mask:          True
+  loss_function:        'cross_entropy'
+
+
+###################################################################
+#######                     bAbI QA Task                     ######
+###################################################################
+babi_task:
+  data_set:        'babi'
+
+  seed:           212
+  valid_ratio:    0.1 # like nature paper
+  batch_size:     *batch_size
+  max_len:        500
+
+  set_type:       ['en-10k']
+  task_selection: [1]
+
+  num_chached:    5
+  threads:        1
+
