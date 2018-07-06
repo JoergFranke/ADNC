@@ -189,18 +189,24 @@ class PlotFunctionality(PlotFunctions):
 
     def plot_short_process(self, batch, plot_dir, name, show=False):
 
-        correct_prediction, false_prediction, text, decoded_predictions, mask, alloc_gate, free_gate, write_gate, \
-        write_weighting, content_weighting, write_strength, alloc_weighting, write_vector, write_key, max_loc = self.bucket.get_write_process(
-            batch)
+
+        if self.bucket.cell_type == 'dnc':
+            correct_prediction, false_prediction, text, decoded_predictions, mask, alloc_gate, free_gate, write_gate, \
+            write_weighting, read_mode, read_weighting, read_head_influence, old_memory, new_memory, read_strength, max_loc = self.bucket.get_basic_functionality(
+                batch=batch)
+        else:
+            correct_prediction, false_prediction, text, decoded_predictions, mask, alloc_gate, free_gate, write_gate, \
+            write_weighting, read_weighting, read_head_influence, old_memory, new_memory, read_strength, max_loc = self.bucket.get_basic_functionality(
+                batch=batch)
+        read_heads = self.bucket.max_read_head
+        write_heads = self.bucket.max_write_head
+        f, ax = plt.subplots((4 + 1 * read_heads + 3 * write_heads - 2), sharex=True, figsize=(12, 18))
+
 
         controller_influence, memory_unit_influence = self.bucket.get_memory_influence(batch)
         influence = np.stack([memory_unit_influence, controller_influence], axis=-1)
         influence = influence / influence.sum(axis=1, keepdims=True)
 
-        read_heads = self.bucket.max_read_head
-        write_heads = self.bucket.max_write_head
-
-        f, ax = plt.subplots((4 + 1 * read_heads + 3 * write_heads - 2), sharex=True, figsize=(12, 18))
 
         ax[0].set_title(name, size=33, weight='bold')
 
@@ -213,9 +219,12 @@ class PlotFunctionality(PlotFunctions):
         for i in range(write_heads):
             self.plot_modes(alloc_gate[:, i, :], ax[3 + i * 3], ['y', 'b'], ['Content', 'Usage'], name='Alloc Gate')
             self.plot_modes(write_gate[:, i, :], ax[4 + i * 3], ['g', 'r'], ['Write', 'Write not'], name='Write Gate')
-        print(write_gate[:, i, :].shape)
-        self.plot_modes(np.zeros([34, 3]), ax[5 + 0 * 1], ['m', 'b', 'c'], ['Backward', 'Content', 'Forward'],
-                        name='Read Mode')
+
+        if self.bucket.cell_type == 'dnc':
+            self.plot_modes(read_mode[:,i,:], ax[5+0*1], ['m', 'b','c'], ['Backward', 'Content', 'Forward'], name='Read Mode')
+        else:
+            self.plot_modes(np.zeros([34, 3]), ax[5 + 0 * 1], ['m', 'b', 'c'], ['Backward', 'Content', 'Forward'],
+                            name='Read Mode')
 
         ax[5 + 0 * 1].set_yticks([])
 
@@ -234,7 +243,7 @@ class PlotFunctionality(PlotFunctions):
             tick.label.set_fontsize(16)
         plt.xlabel("Time steps", size=self.text_size)
 
-        plt.savefig(os.path.join(plot_dir, 'function_{}_{}.{}'.format(name, batch, self.data_type)),
+        plt.savefig(os.path.join(plot_dir, '{}_{}.{}'.format(name, batch, self.data_type)),
                     bbox_inches='tight', format=self.data_type, dpi=80)
         if show:
             plt.show()

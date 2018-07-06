@@ -42,11 +42,11 @@ class Bucket:
             self.link_matrix = link_matrix
             self.precedence_weighting = precedence_weighting
         else:
-            self.cell_type = 'cmu'
+            self.cell_type = 'cbmu'
             memory, usage_vector, write_weightings, read_weightings = memory_states
             alloc_gate, free_gates, write_gate, write_keys, write_strengths, write_vector, erase_vector, read_keys, read_strengths = analyse_signals
-            self.read_mode = np.expand_dims(write_gate, -1)
-            self.link_matrix = np.expand_dims(memory, -1)
+            # self.read_mode = np.expand_dims(write_gate, -1)
+            # self.link_matrix = np.expand_dims(memory, -1)
 
         self.weights_dict = weights_dict
         self.batch_size = memory.shape[1]
@@ -265,21 +265,23 @@ class Bucket:
         text = self.x_word[batch]
         decoded_predictions = self.decoded_predictions[:, batch]
 
-        read_mode = self.read_mode[:max_loc, batch, :, :]
         read_weighting = self.read_weighting[:max_loc, batch, :, :]
         read_strength = self.read_strength[:max_loc, batch, :, :]
         read_key = self.read_keys[:max_loc, batch, :, :, ]
         read_vector = self.read_vector[:max_loc, batch, :, :]
         memory = self.memory[:max_loc, batch, :, :]
-        link_matrix = self.link_matrix[:max_loc, batch, :, :, :]
         controller_output = self.controller_output[:max_loc, batch, :]
 
         read_content_weighting = self.calculate_content_weightings(memory, read_key, read_strength[:, :, 0])
-        forward_weighting, backward_weighting = self.calculate_forward_backward_weightings(link_matrix, read_weighting)
         read_head_influence = self.calculate_read_head_influence(read_vector, self.weights_dict, controller_output)
 
-        return correct_prediction, false_prediction, text, decoded_predictions, mask, forward_weighting, \
-               backward_weighting, read_content_weighting, read_strength, read_key, read_mode, read_weighting, read_vector, read_head_influence, max_loc
+        if self.cell_type == 'dnc':
+            read_mode = self.read_mode[:max_loc, batch, :, :]
+            link_matrix = self.link_matrix[:max_loc, batch, :, :, :]
+            forward_weighting, backward_weighting = self.calculate_forward_backward_weightings(link_matrix, read_weighting)
+            return correct_prediction, false_prediction, text, decoded_predictions, mask, forward_weighting, backward_weighting, read_content_weighting, read_strength, read_key, read_mode, read_weighting, read_vector, read_head_influence, max_loc
+        else:
+            return correct_prediction, false_prediction, text, decoded_predictions, mask, read_content_weighting, read_strength, read_key, read_weighting, read_vector, read_head_influence, max_loc
 
     def get_memory_process(self, batch):
 
