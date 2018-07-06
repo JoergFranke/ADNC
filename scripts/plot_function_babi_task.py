@@ -45,7 +45,8 @@ plot_dir = "experiments/"
 
 
 analyse = True
-BATCH_SIZE = 1
+BATCH_SIZE = 10
+BATCH_SAMPLE = 2
 
 
 # load config from file
@@ -101,8 +102,8 @@ with tf.Session(config=conf) as sess:
     babi_bucket = Bucket(save_list, babi_short=True)
 
     plotter = PlotFunctionality(babi_bucket, title=True, legend=True, text_size=22)
-    plotter.plot_short_process(batch=0, plot_dir=plot_dir, name='function plot {}'.format(model_name))
-    # plot_advanced_functionality(batch=0, plot_dir=plot_dir, name='extended function plot {}'.format(model_name))
+    plotter.plot_short_process(batch=BATCH_SAMPLE, plot_dir=plot_dir, name='function plot {}'.format(model_name))
+    # plot_advanced_functionality(batch=BATCH_SAMPLE, plot_dir=plot_dir, name='extended function plot {}'.format(model_name))
 
 
 

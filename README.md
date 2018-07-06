@@ -4,6 +4,8 @@
 [![Python](https://img.shields.io/badge/python-3.5+-yellow.svg)](https://www.python.org/downloads/release/python-365/)
 [![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
 
+*This repository is under construction and some comments and functions are missing.*
+
 This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
 scalable usage in Question Answering. It is applied to:
 - [20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results)
@@ -111,10 +113,11 @@ It starts a bAbI training and plots every epoch a function plot to control the t
 
 ### Plots
 
-To plot a function plot of the bAbI task -> t.b.a.
+To plot a function plot of the bAbI task choose pre-trained model e.g. `adnc` and run:
 
 `python scripts/plot_function_babi_task.py`
 					
+Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16.
 
 
 
