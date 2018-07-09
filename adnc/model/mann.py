@@ -163,14 +163,7 @@ class MANN():
     @property
     def parameter_amount(self):
         var_list = tf.trainable_variables()
-        parameters = 0
-        for variable in var_list:
-            shape = variable.get_shape()
-            variable_parametes = 1
-            for dim in shape:
-                variable_parametes *= dim.value
-            parameters += variable_parametes
-        return parameters
+        return self.count_parameter_amount(var_list)
 
 
     def get_loss(self, prediction):

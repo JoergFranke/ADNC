@@ -24,14 +24,15 @@ import yaml
 
 
 class color_code:
-    bold = '\033[1m'
-    underline = '\033[4m'
-    blue = '\033[94m'
-    darkcyan = '\033[36m'
-    green = '\033[92m'
-    red = '\033[91m'
-    yellow = '\033[93m'
-    end = '\033[0m'
+    def __init__(self):
+        self.bold = '\033[1m'
+        self.underline = '\033[4m'
+        self.blue = '\033[94m'
+        self.darkcyan = '\033[36m'
+        self.green = '\033[92m'
+        self.red = '\033[91m'
+        self.yellow = '\033[93m'
+        self.end = '\033[0m'
 
 
 class Supporter():

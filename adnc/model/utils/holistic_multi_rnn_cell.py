@@ -41,6 +41,11 @@ class HolisticMultiRNNCell(RNNCell):
                                  "state_is_tuple is not set.  State sizes are: %s"
                                  % str([c.state_size for c in self._cells]))
 
+
+    def compute_output_shape(self, input_shape):
+        sizes = [cell.output_size for cell in self._cells]
+        return sum(sizes)
+
     @property
     def state_size(self):
         if self._state_is_tuple:
@@ -62,7 +67,7 @@ class HolisticMultiRNNCell(RNNCell):
                 # presumably does not contain TensorArrays or anything else fancy
                 return super(HolisticMultiRNNCell, self).zero_state(batch_size, dtype)
 
-    def call(self, inputs, state):
+    def call(self, inputs, state, scope=None):
         """Run this multi-layer cell on inputs, starting from state."""
         cur_state_pos = 0
         cur_inp = inputs

@@ -123,7 +123,8 @@ class CopyTask():
 
         return batch
 
-    def decode_output(self, sample, prediction):
+    @staticmethod
+    def decode_output(sample, prediction):
         if prediction.shape.__len__() == 3:
             prediction_decode_list = []
             target_decode_list = []

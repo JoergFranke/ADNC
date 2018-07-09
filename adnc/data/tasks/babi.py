@@ -71,7 +71,8 @@ class bAbI():
             self.word_dict = word_dict
             self.re_word_dict = re_word_dict
 
-    def download_data(self, data_dir):
+    @staticmethod
+    def download_data(data_dir):
 
         folder_name = 'tasks_1-20_v1-2'
 

@@ -47,7 +47,7 @@ class BatchGenerator():
                     self.order = self.data_set.rng.permutation(self.order)
 
     def __iter__(self):
-        return self
+        return next(self)
 
     def __next__(self):
 

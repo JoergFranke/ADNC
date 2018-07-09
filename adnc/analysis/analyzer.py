@@ -21,10 +21,20 @@ from adnc.analysis.plot_functionality import PlotFunctionality
 from adnc.analysis.prepare_variables import Bucket
 from adnc.model.utils import softmax
 
+"""
+
+"""
 
 class Analyser():
     def __init__(self, data_set, record_dir, save_variables=False, save_fig=False):
+        """
 
+        Args:
+            data_set:
+            record_dir:
+            save_variables:
+            save_fig:
+        """
         self.data_set = data_set
         self.record_dir = record_dir
         self.save_variables = save_variables
@@ -72,7 +82,8 @@ class Analyser():
 
         return self.estimate_memory_usage(variables)
 
-    def plot_analysis(self, variables, plot_dir, name='variables'):
+    @staticmethod
+    def plot_analysis(variables, plot_dir, name='variables'):
 
         buck = Bucket(variables)
         plotter = PlotFunctionality(bucket=buck)
@@ -80,7 +91,8 @@ class Analyser():
         plotter.plot_basic_functionality(batch=0, plot_dir=plot_dir, name=name, show=True)
         plotter.plot_advanced_functionality(batch=0, plot_dir=plot_dir, name=name, show=True)
 
-    def estimate_memory_usage(self, variables):
+    @staticmethod
+    def estimate_memory_usage(variables):
 
         analyse_values, prediction, decoded_predictions, data_sample, weights_dict = variables
         data, target, mask, x_word = data_sample

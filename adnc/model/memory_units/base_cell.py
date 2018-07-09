@@ -39,6 +39,10 @@ class BaseMemoryUnitCell():
         self.reuse = reuse
         self.name = name
 
+        self.const_memory_ones = None # will be defined with use of batch size in call method
+        self.const_batch_memory_range = None # will be defined with use of batch size in call method
+        self.const_link_matrix_inv_eye = None # will be defined with use of batch size in call method
+
     @property
     @abstractmethod
     def state_size(self):

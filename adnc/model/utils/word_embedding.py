@@ -42,7 +42,8 @@ class WordEmbedding():
         embed = tf.nn.embedding_lookup(self.embeddings, word_idx, name='embedding_lookup')
         return embed
 
-    def initialize_random(self, vocabulary_size, embedding_size, dtype):
+    @staticmethod
+    def initialize_random(vocabulary_size, embedding_size, dtype):
         return tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0, dtype=dtype)
 
     def initialize_with_glove(self, word_idx_dict, embedding_size, tmp_dir, dtype):

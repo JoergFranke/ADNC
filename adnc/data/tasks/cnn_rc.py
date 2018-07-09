@@ -106,7 +106,8 @@ class ReadingComprehension():
         self.re_entity_dict = {v: k for k, v in self.entity_dict.items()}
         self.idx_word_dict = {v: k for k, v in self.word_idx_dict.items()}
 
-    def download_data(self, data_dir):
+    @staticmethod
+    def download_data(data_dir):
 
         folder_name = 'cnn'
 

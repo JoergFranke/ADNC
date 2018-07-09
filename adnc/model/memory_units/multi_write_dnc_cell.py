@@ -233,7 +233,8 @@ class MWDNCMemoryUnitCell(BaseMemoryUnitCell):
 
         return write_weighting
 
-    def _update_memory(self, pre_memory, write_weighting, write_vector, erase_vector):
+    @staticmethod
+    def _update_memory(pre_memory, write_weighting, write_vector, erase_vector):
 
         write_w = tf.expand_dims(write_weighting, 3)
         erase_vector = tf.expand_dims(erase_vector, 2)
