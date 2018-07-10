@@ -7,15 +7,31 @@
 *This repository is under construction and some comments and functions are missing.*
 
 This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
-scalable usage in Question Answering. It is applied to:
+scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018.
+
+- MRQA 2018 paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658)
+- More detailed master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf)
+
+The ADNC is applied to:
 - [20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results)
-- [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with 
-[passable results](#cnn-results) without any adaptation or hyper-parameter tuning. 
+- [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with
+[passable results](#cnn-results) without any adaptation or hyper-parameter tuning.
 
-This repository is the groundwork for the MRQA 2018 
-paper submission "Robust and Scalable Differentiable Neural Computer for Question Answering". It contains a modular and 
-fully configurable DNC with the following advancements: 
+The implementation provides the following features:
 
+- Multi-read and multi-write head memory units
+- Key implementations (memory unit, controller, etc. ) have tests
+- Modular implementation of memory unit and controller
+- Fully configurable by a yaml-file 
+- Pre-trained models on bAbI task and CNN RC task
+- Plot of the memory unit functionality during inference
+- The following advancements are implemented:
+
+
+<!--
+This repository is the groundwork for the MRQA 2018
+paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658). It contains a modular and
+fully configurable DNC with the following advancements: -->
 
 
 <table>
