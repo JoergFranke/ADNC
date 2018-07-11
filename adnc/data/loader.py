@@ -24,7 +24,16 @@ from adnc.data.tasks.babi import bAbI
 
 
 class DataLoader():
+    """
+    The data loader loads and process the datasets and provides iterators for training or inference.
+    """
     def __init__(self, config, word_dict=None, re_word_dict=None):
+        """
+        Args:
+            config:         dict with the config to pre-process the dataset
+            word_dict:      dict with word-feature pairs, optional
+            re_word_dict:   dict with feature-word pairs, optional
+        """
         self.config = config
 
         if config['data_set'] == 'copy_task':
@@ -47,6 +56,14 @@ class DataLoader():
         return self.dataset.y_size
 
     def batch_amount(self, set_name):
+        """
+        Calculates the batch amount given a batch size
+        Args:
+            set_name:   str, name of dataset (train, test, valid)
+
+        Returns:        int, number of batches
+
+        """
         if 'max_len' in self.config.keys():
             return np.floor(
                 self.dataset.sample_amount(set_name, self.config['max_len']) / self.config['batch_size']).astype(int)
@@ -63,6 +80,18 @@ class DataLoader():
         return self.dataset.decode_output(sample, prediction)
 
     def get_data_loader(self, set_name, shuffle=True, max_len=False, batch_size=None, get_shuffle_option=False):
+        """
+        Provides a data iterator of the given dataset.
+        Args:
+            set_name:           str, name of dataset
+            shuffle:            bool, shuffle set or not
+            max_len:            int, max length in time of sample
+            batch_size:         int, batch size
+            get_shuffle_option: bool, returns shuffle function
+
+        Returns:                iter, iterator over dataset
+
+        """
 
         if batch_size == None:
             batch_size = self.config['batch_size']
@@ -77,6 +106,16 @@ class DataLoader():
 
     @staticmethod
     def _generate_in_background(batch_gen, num_cached=10, threads=1):
+        """
+        Starts threads with parallel batch generator for faster iteration
+        Args:
+            batch_gen:      func, the batch generator
+            num_cached:     int, numb of caches batches
+            threads:        int, numb of parallel threads
+
+        Returns:            iter, iterator over dataset
+
+        """
 
         queue = Queue(maxsize=num_cached)
         sentinel = object()

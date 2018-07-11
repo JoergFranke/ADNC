@@ -16,6 +16,9 @@ from abc import abstractmethod, ABCMeta
 import numpy as np
 import tensorflow as tf
 
+"""
+The basis DNC memory unit class, all other inherit from this.
+"""
 
 class BaseMemoryUnitCell():
     def __init__(self, input_size, memory_length, memory_width, read_heads, bypass_dropout=False, dnc_norm=False,

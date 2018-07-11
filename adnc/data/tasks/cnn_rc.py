@@ -24,10 +24,13 @@ import numpy as np
 
 from adnc.data.utils.data_memorizer import DataMemorizer
 
+"""
+Downloads and pre-preocess the CNN RC task. 
+"""
+
 DEFAULT_DATA_FOLDER = 'data_cnn'
 DEFAULT_TMP_FOLDER = 'data_tmp'
 CNN_DATA_URL = 'http://cs.stanford.edu/~danqi/data/cnn.tar.gz'
-
 
 class ReadingComprehension():
     def __init__(self, config, save=True, debug_max_load=None):

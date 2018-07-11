@@ -18,6 +18,9 @@ from tensorflow.contrib.rnn import LayerNormBasicLSTMCell, LSTMCell, LSTMBlockCe
 from adnc.model.controller_units.custom_lstm_cell import CustomLSTMCell
 from adnc.model.utils import get_activation
 
+"""
+A wrapper for the controller units.
+"""
 
 def get_rnn_cell_list(config, name, reuse=False, seed=123, dtype=tf.float32):
     cell_list = []

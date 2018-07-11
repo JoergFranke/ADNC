@@ -17,6 +17,9 @@ import tensorflow as tf
 from adnc.model.memory_units.dnc_cell import DNCMemoryUnitCell
 from adnc.model.utils import oneplus, layer_norm, unit_simplex_initialization
 
+"""
+The content-based memory unit.
+"""
 
 class ContentBasedMemoryUnitCell(DNCMemoryUnitCell):
 

@@ -27,6 +27,11 @@ from adnc.data import DataLoader
 from adnc.model import MANN, Optimizer, Supporter
 from adnc.model.utils import EarlyStop
 
+"""
+This script performs starts a training run on the bAbI task. The training can be fully configured in the config.yml
+file. To restore a session use the --sess and --check flag.
+"""
+
 tf.reset_default_graph()
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -63,7 +68,7 @@ valid_loader = dl.get_data_loader('valid')  # gets a valid data iterator
 train_loader = dl.get_data_loader('train')  # gets a train data iterator
 
 if analyse:
-    ana = Analyser(dataset_name, sp.session_dir, save_fig=plot_process,
+    ana = Analyser(sp.session_dir, save_fig=plot_process,
                    save_variables=True)  # initilizes a analyzer class
 
 sp.config(model_type)['input_size'] = dl.x_size  # after the data loader is initilized, the input size

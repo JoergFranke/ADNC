@@ -17,6 +17,9 @@ import tensorflow as tf
 from adnc.model.memory_units.multi_write_dnc_cell import MWDNCMemoryUnitCell
 from adnc.model.utils import oneplus, layer_norm, unit_simplex_initialization
 
+"""
+The content-based memory unit with multi write heads.
+"""
 
 class MWContentMemoryUnitCell(MWDNCMemoryUnitCell):
 

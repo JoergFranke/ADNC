@@ -16,6 +16,9 @@ import numpy as np
 from collections import OrderedDict
 from scipy.sparse import csr_matrix
 
+"""
+Generates "repeat a input sequences"-samples as described in NTM paper.
+"""
 
 class CopyTask():
     def __init__(self, config):

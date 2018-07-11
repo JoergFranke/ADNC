@@ -17,6 +17,9 @@ import numpy as np
 from adnc.model.utils import softmax
 from adnc.model.utils import weighted_softmax
 
+"""
+The bucket prepaires and provide a full samples sequence of the DNC internal states for plotting the functions. 
+"""
 
 class Bucket:
     def __init__(self, variables, babi_short=True):

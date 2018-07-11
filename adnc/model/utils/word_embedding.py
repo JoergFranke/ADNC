@@ -21,6 +21,9 @@ import hashlib
 from collections import OrderedDict
 import tensorflow as tf
 
+"""
+Downloads and process glove word embeddings, applies them to a given vocabulary of a dataset. 
+"""
 
 class WordEmbedding():
     def __init__(self, embedding_size, vocabulary_size=None, word_idx_dict=None, initialization='uniform', tmp_dir='.',

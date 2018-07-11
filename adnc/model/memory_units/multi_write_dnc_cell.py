@@ -20,6 +20,9 @@ from adnc.model.utils import layer_norm
 from adnc.model.utils import oneplus
 from adnc.model.utils import unit_simplex_initialization
 
+"""
+The vanilla DNC memory unit with multi write heads.
+"""
 
 class MWDNCMemoryUnitCell(BaseMemoryUnitCell):
     def __init__(self, input_size, memory_length, memory_width, read_heads, write_heads, bypass_dropout=False,

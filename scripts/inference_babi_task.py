@@ -25,6 +25,11 @@ import tensorflow as tf
 from adnc.data.loader import DataLoader
 from adnc.model.mann import MANN
 
+"""
+This script performs a inference with the given models of this repository on the bAbI task 1 or on 1-20. Please add the 
+model name when calling the script. (dnc, adnc, biadnc, biadnc-all, biadnc-aug16-all) 
+"""
+
 parser = argparse.ArgumentParser(description='Load model')
 parser.add_argument('model', type=str, default=False, help='model name')
 model_name = parser.parse_args().model

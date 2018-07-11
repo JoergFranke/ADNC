@@ -20,10 +20,13 @@ from urllib.request import Request, urlopen
 
 import numpy as np
 
+"""
+Downloads and pre-preocess the 20 bAbI task. It also augmets task 16 as described in paper.
+"""
+
 DEFAULT_DATA_FOLDER = "data_babi"
 LONGEST_SAMPLE_LENGTH = 1920
 bAbI_URL = 'http://www.thespermwhale.com/jaseweston/babi/tasks_1-20_v1-2.tar.gz'
-
 
 class bAbI():
     def __init__(self, config, word_dict=None, re_word_dict=None):

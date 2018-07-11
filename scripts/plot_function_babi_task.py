@@ -25,6 +25,11 @@ from adnc.analysis import Bucket, PlotFunctionality
 
 tf.reset_default_graph()
 
+"""
+This script plot the memory unit functionality with the given models of this repository on the bAbI task 1 or on 1-20. 
+Please add the model name when calling the script. (dnc, adnc, biadnc, biadnc-all, biadnc-aug16-all) 
+"""
+
 parser = argparse.ArgumentParser(description='Load model')
 parser.add_argument('model', type=str, default=False, help='model name')
 model_name = parser.parse_args().model

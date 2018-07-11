@@ -21,21 +21,19 @@ from adnc.analysis.plot_functionality import PlotFunctionality
 from adnc.analysis.prepare_variables import Bucket
 from adnc.model.utils import softmax
 
-"""
-
-"""
 
 class Analyser():
-    def __init__(self, data_set, record_dir, save_variables=False, save_fig=False):
+    """
+    The analyzer helps to analyze the functionality of the DNC during training. It is used to calculate the
+    memory influence and to plot function plots of the memory usage.
+    """
+    def __init__(self, record_dir, save_variables=False, save_fig=False):
         """
-
         Args:
-            data_set:
-            record_dir:
-            save_variables:
-            save_fig:
+            record_dir:     dir to store the function plots
+            save_variables: bool, to save weights, gradients and losses in a numpy list
+            save_fig:       bool, save plots
         """
-        self.data_set = data_set
         self.record_dir = record_dir
         self.save_variables = save_variables
         self.save_fig = save_fig

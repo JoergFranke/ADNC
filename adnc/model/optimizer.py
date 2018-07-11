@@ -14,6 +14,9 @@
 # ==============================================================================
 import tensorflow as tf
 
+"""
+The Optimizer clas is a wrapper for the TF optimizer and performs gradient clipping and weight decay
+"""
 
 class Optimizer:
     def __init__(self, config, loss, variables, use_locking=False):

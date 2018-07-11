@@ -19,6 +19,9 @@ from adnc.model.memory_units.dnc_cell import DNCMemoryUnitCell
 from adnc.model.memory_units.multi_write_content_based_cell import MWContentMemoryUnitCell
 from adnc.model.memory_units.multi_write_dnc_cell import MWDNCMemoryUnitCell
 
+"""
+A warpper for the memory units
+"""
 
 def get_memory_unit(input_size, config, name='mu', analyse=False, reuse=False, seed=123, dtype=tf.float32):
     memory_length = config['memory_length']

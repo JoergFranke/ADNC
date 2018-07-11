@@ -18,6 +18,15 @@ import threading
 
 class BatchGenerator():
     def __init__(self, data_set, set, batch_size, shuffle=True, max_len=False):
+        """
+        Creates batches out of samples from the dataset object
+        Args:
+            data_set:   dataset object, contains the dataset
+            set:        str, name of dataset (train, valid, test)
+            batch_size: int, batch size
+            shuffle:    bool, shuffle or not
+            max_len:    int, max length of sample in time
+        """
 
         self.set = set
         self.data_set = data_set
@@ -36,9 +45,15 @@ class BatchGenerator():
         self.sample_count = 0
 
     def shuffle_order(self):
+        """
+        Shuffles the order of sample in dataset
+        """
         self.order = self.data_set.rng.permutation(self.order)
 
     def increase_sample_count(self):
+        """
+        Increase the global sample count, it is required because it can run in parallel
+        """
         with self.lock:
             self.sample_count += 1
             if self.sample_count >= self.sample_amount:
@@ -50,7 +65,12 @@ class BatchGenerator():
         return next(self)
 
     def __next__(self):
+        """
+        Loads the next data samples and creates a batch. It uses the get_sample and patch_batch methods which are
+        provided by the dataset
+        Returns:    batch of samples
 
+        """
         batch_list = []
         for b in range(self.batch_size):
 

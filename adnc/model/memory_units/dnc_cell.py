@@ -18,6 +18,9 @@ import tensorflow as tf
 from adnc.model.memory_units.base_cell import BaseMemoryUnitCell
 from adnc.model.utils import oneplus, layer_norm, unit_simplex_initialization
 
+"""
+The vanilla DNC memory unit.
+"""
 
 class DNCMemoryUnitCell(BaseMemoryUnitCell):
     def __init__(self, input_size, memory_length, memory_width, read_heads, bypass_dropout=False, dnc_norm=False,

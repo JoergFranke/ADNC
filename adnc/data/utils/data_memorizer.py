@@ -20,8 +20,15 @@ from collections import OrderedDict
 
 
 class DataMemorizer():
+    """
+    Given a config, it saves the pre-processed data in a pickle dump.
+    """
     def __init__(self, config, tmp_dir):
-
+        """
+        Args:
+            config:     dict, config of dataset
+            tmp_dir:    str, dir to save dataset dump
+        """
         self.hash_name = self.make_config_hash(config)
         if isinstance(tmp_dir, pathlib.Path):
             self.tmp_dir = tmp_dir
@@ -35,25 +42,46 @@ class DataMemorizer():
         return self.check_existent()
 
     def check_existent(self):
+        """
+        Returns:    bool, if the dataset dump exists
+        """
         file_name = self.tmp_dir / self.hash_name
         return file_name.exists()
 
     def load_data(self):
+        """
+        Returns:    dataset, pickle load of dataset
+        """
         with open(str(self.tmp_dir / self.hash_name), 'rb') as outfile:
             data = pickle.load(outfile)
         return data
 
     def dump_data(self, data_to_save):
+        """
+        Args:
+            data_to_save:   object, what to save
+        """
         with open(str(self.tmp_dir / self.hash_name), 'wb') as outfile:
             pickle.dump(data_to_save, outfile)
 
     def purge_data(self):
+        """
+        removes data dump
+        """
         file_name = str(self.tmp_dir / self.hash_name)
         if os.path.isfile(file_name):
             os.remove(file_name)
 
     @staticmethod
     def make_config_hash(dict):
+        """
+        computes a hash string to name the dataset dump uniquely
+        Args:
+            dict:   dict, config which describes the dataset
+
+        Returns:    str, hash tag of dataset
+
+        """
         pre = sorted(((k, v) for k, v in dict.items() if k not in ['batch_size', 'num_chached', 'threads']))
         sort_dict = OrderedDict()
         for element in pre:

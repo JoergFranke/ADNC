@@ -22,6 +22,10 @@ from tqdm import tqdm
 from adnc.data.loader import DataLoader
 from adnc.model.mann import MANN
 
+"""
+This script performs a inference with the given models of this repository on the CNN RC task.
+"""
+
 expt_dir = "experiments/pre_trained/cnn_rc_task/adnc"
 
 # load config file

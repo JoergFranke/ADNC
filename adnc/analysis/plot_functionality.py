@@ -23,6 +23,9 @@ import matplotlib.pyplot as plt
 
 from adnc.analysis.plot_functions import PlotFunctions
 
+"""
+Function for plotting different memory units behaviours.  
+"""
 
 class PlotFunctionality(PlotFunctions):
     def __init__(self, bucket, legend=False, title=False, text_size=16, data_type='png'):

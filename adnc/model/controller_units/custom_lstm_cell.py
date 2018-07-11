@@ -17,6 +17,9 @@ import tensorflow as tf
 
 from adnc.model.utils import layer_norm, get_activation
 
+"""
+A implementation of the LSTM unit, it performs a bit faster as the TF implementation and implements layer norm.
+"""
 
 class CustomLSTMCell():
     def __init__(self, num_units, layer_norm=False, activation='tanh', seed=100, reuse=False, trainable=True,

@@ -15,6 +15,9 @@
 import numpy as np
 from collections import deque
 
+"""
+EarlyStop has a true call return if the loss was the last "list_len" higher as the loss before.
+"""
 
 class EarlyStop():
     def __init__(self, list_len=5):

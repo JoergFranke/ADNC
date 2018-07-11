@@ -22,6 +22,10 @@ from shutil import copyfile
 import numpy as np
 import yaml
 
+"""
+The supporter class creates for each training run a folder, logs the prints in a file and saves the weights, 
+gradients and losses. 
+"""
 
 class color_code:
     def __init__(self):

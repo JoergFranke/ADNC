@@ -21,6 +21,9 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 from matplotlib import ticker
 
+"""
+Principle plot functions for gates, modes, input/output sequences or reading/writings of the DNC
+"""
 
 class PlotFunctions():
     def __init__(self, legend=False, title=False, text_size=16):
