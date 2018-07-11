@@ -4,28 +4,21 @@
 [![Python](https://img.shields.io/badge/python-3.5+-yellow.svg)](https://www.python.org/downloads/release/python-365/)
 [![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
 
-*This repository is under construction and some comments and functions are missing.*
 
 This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
-scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018.
-
-- MRQA 2018 paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658)
-- More detailed master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf)
-
-The ADNC is applied to:
-- [20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results)
-- [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with
+scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018. In this repository the ADNC is applied to the
+[20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results) adn the 
+[CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with
 [passable results](#cnn-results) without any adaptation or hyper-parameter tuning.
 
-The implementation provides the following features:
+The repository contains the following features:
 
-- Multi-read and multi-write head memory units
-- Key implementations (memory unit, controller, etc. ) have tests
 - Modular implementation of memory unit and controller
-- Fully configurable by a yaml-file 
+- Fully configurable model/experiment with a yaml-file 
+- Unit tests for all key parts (memory unit, controller, etc. )
 - Pre-trained models on bAbI task and CNN RC task
-- Plot of the memory unit functionality during inference
-- The following advancements are implemented:
+- Plots of the memory unit functionality during sequence inference
+- The following advancements to the DNC:
 
 
 <!--
@@ -76,6 +69,11 @@ fully configurable DNC with the following advancements: -->
       </tr>
     </tbody>
 </table>
+
+Please find more information about the advancements and the experiemnts in 
+
+- MRQA 2018 paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658)
+- Master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf)
 
 The plot below shows the impact of the different advancements in the word error rate with the bAbI task 1.
 
