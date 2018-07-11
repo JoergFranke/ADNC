@@ -6,8 +6,8 @@
 
 
 This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
-scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018. In this repository the ADNC is applied to the
-[20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results) adn the 
+scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018. This advanced DNC (ADNC) is applied to the
+[20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results) and the 
 [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with
 [passable results](#cnn-results) without any adaptation or hyper-parameter tuning.
 
@@ -19,12 +19,6 @@ The repository contains the following features:
 - Pre-trained models on bAbI task and CNN RC task
 - Plots of the memory unit functionality during sequence inference
 - The following advancements to the DNC:
-
-
-<!--
-This repository is the groundwork for the MRQA 2018
-paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658). It contains a modular and
-fully configurable DNC with the following advancements: -->
 
 
 <table>
@@ -70,10 +64,10 @@ fully configurable DNC with the following advancements: -->
     </tbody>
 </table>
 
-Please find more information about the advancements and the experiemnts in 
+Please find more information about the advancements and the experiments in 
 
 - MRQA 2018 paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658)
-- Master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf)
+- Master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf) with a detailed DNC description.  
 
 The plot below shows the impact of the different advancements in the word error rate with the bAbI task 1.
 
