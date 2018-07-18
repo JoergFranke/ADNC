@@ -133,8 +133,8 @@ Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `bi
 ### 20 bAbI QA task 
 
 - Joint trained on all 20 tasks.
-- Mean results of 5 runs with different initializations.
-- Same hyper-parameter as the [original DNC](https://www.nature.com/articles/nature20101)
+- Mean results of 5 training runs with different initializations.
+- Similar hyper-parameter as the [original DNC](https://www.nature.com/articles/nature20101)
 - The unidirectional controller has one LSTM layer and 256 hidden units and the bidirectional has 172 hidden units in each direction. 
 - The memory unit has 192 locations, a width of 64 and 4 read heads. 
 - Bypass Dropout is applied with a dropout rate of 10\%. 
@@ -171,7 +171,7 @@ Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `bi
 
 ### CNN RC Task
 
-- All hyperparameters are chosen inspired by related work. 
+- All hyper-parameters are chosen inspired by related work. 
 - The controller is a LSTM with one hidden layer and a layer size of 512 and a memory matrix with 256 locations, a width of 128 and four read heads. 
 - Bypass Dropout is applied with a dropout rate of 10\%. 
 - The maximum sequence length during training is limited to 1400 words. 
