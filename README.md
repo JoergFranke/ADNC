@@ -5,16 +5,16 @@
 [![TensorFLow](https://img.shields.io/badge/TensorFlow-1.8-yellow.svg)](https://www.tensorflow.org/)
 
 
-This repository contains a implementation of a Differentiable Neural Computer (DNC) with advancements for a more robust and 
-scalable usage in Question Answering. It is published on the MRQA workshop at the ACL 2018. This advanced DNC (ADNC) is applied to the
-[20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [state-of-the-art results](#babi-results) and the 
+This repository contains a implementation of a Advanced Differentiable Neural Computer (ADNC) for a more robust and 
+scalable usage in Question Answering. This work is published on the [MRQA workshop](https://mrqa2018.github.io/) at the [ACL 2018](https://acl2018.org/). The ADNC is applied to the
+[20 bAbI QA tasks](https://research.fb.com/downloads/babi/) with [SOTA mean results](#babi-results) and to the 
 [CNN Reading Comprehension Task](https://github.com/danqi/rc-cnn-dailymail) with
 [passable results](#cnn-results) without any adaptation or hyper-parameter tuning.
 
 The repository contains the following features:
 
-- Modular implementation of memory unit and controller
-- Fully configurable model/experiment with a yaml-file 
+- Modular implementation of controller and memory unit
+- Fully configurable model/experiment with a yaml-config-file 
 - Unit tests for all key parts (memory unit, controller, etc. )
 - Pre-trained models on bAbI task and CNN RC task
 - Plots of the memory unit functionality during sequence inference
@@ -64,10 +64,10 @@ The repository contains the following features:
     </tbody>
 </table>
 
-Please find more information about the advancements and the experiments in 
+Please find detailed information about the advancements and the experiments in 
 
 - MRQA 2018 paper submission [Robust and Scalable Differentiable Neural Computer for Question Answering](https://arxiv.org/abs/1807.02658)
-- Master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf) with a detailed DNC description.  
+- My master thesis about the [Advanced DNC for Question Answering](http://isl.anthropomatik.kit.edu/cmu-kit/downloads/Master_Franke_2018.pdf) with a detailed DNC/ADNC description.  
 
 The plot below shows the impact of the different advancements in the word error rate with the bAbI task 1.
 
@@ -104,7 +104,7 @@ For __bAbI inference__, choose pre-trained model e.g. `adnc` and run:
 
 `python scripts/inference_babi_task.py adnc`
 
-Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16.
+Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16. The augmentation provides equal word distribution during training.  
 
 For __CNN inference__ of pre-trained ADNC run:
 
@@ -128,8 +128,20 @@ To plot a function plot of the bAbI task choose pre-trained model e.g. `adnc` an
 Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `biadnc-aug16-all` for all bAbI tasks with or without augmentation of task 16.
 
 
+## Experiments & Results 
 
-## bAbI Results
+### 20 bAbI QA task 
+
+- Joint trained on all 20 tasks.
+- Mean results of 5 runs with different initializations.
+- Same hyper-parameter as the [original DNC](https://www.nature.com/articles/nature20101)
+- The unidirectional controller has one LSTM layer and 256 hidden units and the bidirectional has 172 hidden units in each direction. 
+- The memory unit has 192 locations, a width of 64 and 4 read heads. 
+- Bypass Dropout is applied with a dropout rate of 10\%. 
+- The model is optimized with RMSprop with fixed learning rate of 3e-05 and momentum of 0.9.
+- Task 16 Augmentation: The task contains a strong local minimum. Given the most common color as answer leads to a correct answer in 50\% of the cases.
+
+#### bAbI Results
 
 | Task                             | DNC             | EntNet                 | SDNC                   | ADNC                  | BiADNC                 | BiADNC<br>+aug16|
 |----------------------------------|-----------------|------------------------|------------------------|------------------------|------------------------|--------------------------------------------------------|
@@ -156,7 +168,16 @@ Possible models are `dnc`, `adnc`, `biadnc` on bAbi Task 1 and `biadnc-all`, `bi
 | __Mean WER:__                        | 16.7 ± 7.6  | 9.7 ± 2.6          | 6.4 ± 2.5          | 6.3 ± 2.7          | 3.2 ± 0.5          | 0.4 ± 0.3                                 |
 | __Failed Tasks (<5%):__ | 11.2 ± 5.4  | 5.0 ± 1.2          | 4.1 ± 1.6          | 3.2 ± 0.8          | 1.4 ± 0.5          | 0.0 ± 0.0                                 |
 
-## CNN Results
+
+### CNN RC Task
+
+- All hyperparameters are chosen inspired by related work. 
+- The controller is a LSTM with one hidden layer and a layer size of 512 and a memory matrix with 256 locations, a width of 128 and four read heads. 
+- Bypass Dropout is applied with a dropout rate of 10\%. 
+- The maximum sequence length during training is limited to 1400 words. 
+- The model is optimized with RMSprop with fixed learning rate of 3e-05 and momentum of 0.9.
+
+#### CNN Results
 
 | Model            | valid | test | 
 |:-----------------|:-----:|:----:|
