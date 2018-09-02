@@ -86,7 +86,7 @@ that the advancements lead to a more meaningful gate usage of the memory cell as
 
 ## How to use:
 
-### Setup ADNC
+### Setup ADNC (on Ubuntu)
 
 To setup an virtual environment and install ADNC:
 ```
