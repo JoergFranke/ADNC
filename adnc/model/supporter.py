@@ -27,7 +27,7 @@ The supporter class creates for each training run a folder, logs the prints in a
 gradients and losses. 
 """
 
-class color_code:
+class ColorCode:
     def __init__(self):
         self.bold = '\033[1m'
         self.underline = '\033[4m'
@@ -86,7 +86,7 @@ class Supporter():
         else:
             raise UserWarning('supporter: no config found')
 
-        self.pub('load config file ' + color_code.darkcyan + '{}'.format(config_file) + color_code.end)
+        self.pub('load config file ' + ColorCode().darkcyan + '{}'.format(config_file) + ColorCode().end)
         with open(config_file, 'r') as f:
             self.configs = yaml.load(f)
 
@@ -97,7 +97,7 @@ class Supporter():
         if not task_id:
             self.pub('### task id: {}'.format(task_id))
         self.pub('##############################################')
-        self.pub(color_code.bold + 'SUPPORTER LOG' + color_code.end)
+        self.pub(ColorCode().bold + 'SUPPORTER LOG' + ColorCode().end)
         self.pub("model                  : {}".format(self.model_type))
         self.pub("data set               : {}".format(self.data_set))
         self.pub("experiment name        : {}".format(self.experiment_name))
@@ -106,13 +106,13 @@ class Supporter():
         self.pub("time                   : {}".format(time.strftime("%H:%M:%S")))
         self.pub("host                   : {}".format(self.host_name))
         self.pub('##############################################')
-        self.pub(color_code.bold + 'DATA CONFIG' + color_code.end)
+        self.pub(ColorCode().bold + 'DATA CONFIG' + ColorCode().end)
         self.pub(self.configs[self.data_set])
         self.pub('##############################################')
-        self.pub(color_code.bold + 'MODEL CONFIG' + color_code.end)
+        self.pub(ColorCode().bold + 'MODEL CONFIG' + ColorCode().end)
         self.pub(self.configs[self.model_type])
         self.pub('##############################################')
-        self.pub(color_code.bold + 'TRAIN CONFIG' + color_code.end)
+        self.pub(ColorCode().bold + 'TRAIN CONFIG' + ColorCode().end)
         self.pub(self.config('training'))
         self.pub('##############################################')
 
