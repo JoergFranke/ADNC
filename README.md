@@ -115,7 +115,7 @@ For __CNN inference__ of pre-trained ADNC run:
 
 The configuration file `scripts/config.yml` contains the full config of the ADNC training. The training script can be run with:
 
-`python scripts/start/training.py`
+`python scripts/start_training.py`
 
 It starts a bAbI training and plots every epoch a function plot to control the training progress. 
 
